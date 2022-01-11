@@ -1,4 +1,4 @@
-package com.github.z3r0x24.jani;
+package io.github.z3r0x24.jani;
 
 /**
  * This interface defines an easing function for animation. Common easing functions are already pre-defined in the

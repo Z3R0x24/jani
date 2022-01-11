@@ -1,4 +1,4 @@
-package com.github.z3r0x24.jani.Keyframes;
+package io.github.z3r0x24.jani.Keyframes;
 
 /**
  * This exception is thrown when a Keyframe instant (e.g: 0%, 25%, 3.5s, etc.) value is invalid or missing. The only

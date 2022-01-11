@@ -1,4 +1,4 @@
-package com.github.z3r0x24.jani;
+package io.github.z3r0x24.jani;
 
 import java.awt.*;
 

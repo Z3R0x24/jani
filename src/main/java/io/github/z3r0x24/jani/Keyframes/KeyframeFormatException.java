@@ -1,4 +1,4 @@
-package com.github.z3r0x24.jani.Keyframes;
+package io.github.z3r0x24.jani.Keyframes;
 
 /**
  * This exception is thrown when the provided keyframe string is improperly formatted.

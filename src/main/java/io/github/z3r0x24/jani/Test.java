@@ -1,6 +1,6 @@
-package com.github.z3r0x24.jani;
+package io.github.z3r0x24.jani;
 
-import com.github.z3r0x24.jani.Keyframes.Keyframes;
+import io.github.z3r0x24.jani.Keyframes.Keyframes;
 
 import javax.swing.*;
 import java.awt.*;
