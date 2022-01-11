@@ -255,17 +255,17 @@ public abstract class Animator {
 
     /**
      * Sets the easing function to use. Default functions are given in the {@code Easing.Default} enum. All easing
-     * functions should have a min value of 0 and a max value of 1. More specifically: <br/>
-     * <br/>
+     * functions should have a min value of 0 and a max value of 1. More specifically: <br>
+     * <br>
      * <b>f(x)</b> =
-     * <table>
+     * <table summary="">
      *     <tr>
      *         <td>0 ;</td>
      *         <td>x = 0</td>
      *     </tr>
      *     <tr>
      *         <td>f(x) ;</td>
-     *         <td>0 < x < 1</td>
+     *         <td>0 &lt; x &lt; 1</td>
      *     </tr>
      *     <tr>
      *         <td>1 ;</td>
@@ -371,6 +371,7 @@ public abstract class Animator {
     /**
      * Setting this value to true when repeats are on will indicate the animation that it should run back only to the
      * start instead of looping backwards the same amount of times it looped forward.
+     * @param backToStart if true, animation will only revert to starting point
      */
     public void setBackToStart(boolean backToStart) {
         this.backToStart = backToStart;
