@@ -4,7 +4,7 @@ package io.github.z3r0x24.jani;
  * This interface defines an easing function for animation. Common easing functions are already pre-defined in the
  * {@code Default} enum, all of these can be found on the
  * <a href="https://easings.net/">Easing Functions Cheat Sheet</a>. Custom easing functions can be defined by
- * implementing the {@code interpolate()} method.
+ * implementing the {@code apply()} method.
  */
 public interface Easing {
     float apply(float fraction);
