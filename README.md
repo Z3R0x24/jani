@@ -24,14 +24,13 @@ jAni is able to:
 To get started using jAni simply refer to the [wiki](https://github.com/Z3R0x24/jani/wiki) for usage instructions and detailed information about most classes (currently a WIP).
 
 ## Example code
-You can find a very simple example of what this library can do in the [Test class](https://github.com/Z3R0x24/jani/blob/main/src/main/java/io/github/z3r0x24/jani/Test.java) inside the library.
+You can find an example of what this library can do in the [Demo class](https://github.com/Z3R0x24/jani/blob/main/src/main/java/io/github/z3r0x24/jani/Demo.java).
 
 ## Contribute
 If you find any problems or have a suggestion feel free to submit an issue! I'll be happy to look into it when I have the time, same goes for pull requests if you'd like to contribute more directly.
 Here is a small list of ideas that might make it into the library later on:
 * Parse multiple key frame data from a plain text file and store it by label.
-* Make `Animation` capable of interpolate points or dimensions using different easing functions (currently possible with custom logic using `Animator`, but not built-in).
-* Create a better demo.
+* Make `Animation` capable of interpolating points or dimensions using different easing functions (currently possible with custom logic using `Animator`, but not built-in).
 
 ## License
 This project is licensed under the [MIT License](https://github.com/Z3R0x24/jani/blob/main/LICENSE).
