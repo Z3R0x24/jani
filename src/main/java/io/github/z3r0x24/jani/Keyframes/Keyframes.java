@@ -9,6 +9,14 @@ import java.util.Collections;
  * and a value for said instant. The instant determines when that value should occur during the interpolation.
  */
 public class Keyframes {
+
+    /**
+     * Defines the instant unit for the key frames:
+     * <ul>
+     *     <li> PERCENT: Percentage of the animation duration.
+     *     <li> SECOND: Absolute value in seconds regardless of duration.
+     * </ul>
+     */
     public enum Unit {
         PERCENT, SECOND;
 
@@ -34,6 +42,15 @@ public class Keyframes {
         }
     }
 
+    /**
+     * Defines the admitted types of values for the key frames:
+     * <ul>
+     *     <li> INT: int
+     *     <li> DOUBLE: double
+     *     <li> POINT: {@code java.awt.Point}
+     *     <li> DIM: {@code java.awt.Dimension}
+     * </ul>
+     */
     public enum Type {
         INT, DOUBLE, POINT, DIM;
 
@@ -81,10 +98,8 @@ public class Keyframes {
     private Unit unit = null;
 
     /**
-     * Creates a keyframes object with the specified value type and instant unit. These are defined in the {@code Type}
-     * and {@code Unit} enums, respectively. Parsing a string with the keyframes info may be preferred.
-     * @see Keyframes.Type
-     * @see Keyframes.Unit
+     * Creates a keyframes object with the specified value type and instant unit. These are defined in the {@link Type}
+     * and {@link Unit} enums, respectively. Parsing a string with the keyframes info may be preferred.
      * @see Keyframes#parse(String)
      * @param type Value type, it will determine the interpolation boundaries
      * @param unit Instant unit, either percentage or seconds
@@ -96,6 +111,7 @@ public class Keyframes {
         this.unit = unit;
     }
 
+    // For parsing purposes
     private Keyframes(){}
 
     /**
@@ -235,14 +251,29 @@ public class Keyframes {
         }
     }
 
+    /**
+     * @return The type admitted by this instance
+     * @see Keyframes.Type
+     */
     public Type getType() {
         return type;
     }
 
+    /**
+     * @return The unit used in this instance
+     * @see Keyframes.Unit
+     */
     public Unit getUnit() {
         return unit;
     }
 
+    /**
+     * Returns the int value at the key frame specified by {@code kfIndex}. Calling this method on an instance with a
+     * type different from {@code Keyframes.Type.INT} will result in an exception.
+     * @param kfIndex index of the key frame holding the value
+     * @return integer value
+     * @see Keyframes.Type
+     */
     public int getIntAt(int kfIndex) {
         if (!type.equals(Type.INT))
             throw new IllegalStateException("Incorrect solicited type (Type: " + type + ", solicited: int");
@@ -250,6 +281,13 @@ public class Keyframes {
         return (int) frames.get(kfIndex).value;
     }
 
+    /**
+     * Returns the double value at the key frame specified by {@code kfIndex}. Calling this method on an instance with a
+     * type different from {@code Keyframes.Type.DOUBLE} will result in an exception.
+     * @param kfIndex index of the key frame holding the value
+     * @return double value
+     * @see Keyframes.Type
+     */
     public double getDoubleAt(int kfIndex) {
         if (!type.equals(Type.DOUBLE))
             throw new IllegalStateException("Incorrect solicited type (Type: " + type + ", solicited: double");
@@ -257,6 +295,13 @@ public class Keyframes {
         return (double) frames.get(kfIndex).value;
     }
 
+    /**
+     * Returns the Point value at the key frame specified by {@code kfIndex}. Calling this method on an instance with a
+     * type different from {@code Keyframes.Type.POINT} will result in an exception.
+     * @param kfIndex index of the key frame holding the value
+     * @return Point value
+     * @see Keyframes.Type
+     */
     public Point getPointAt(int kfIndex) {
         if (!type.equals(Type.POINT))
             throw new IllegalStateException("Incorrect solicited type (Type: " + type + ", solicited: Point");
@@ -264,6 +309,13 @@ public class Keyframes {
         return (Point) frames.get(kfIndex).value;
     }
 
+    /**
+     * Returns the Dimension value at the key frame specified by {@code kfIndex}. Calling this method on an instance
+     * with a type different from {@code Keyframes.Type.DIM} will result in an exception.
+     * @param kfIndex index of the key frame holding the value
+     * @return Dimension value
+     * @see Keyframes.Type
+     */
     public Dimension getDimAt(int kfIndex) {
         if (!type.equals(Type.DIM))
             throw new IllegalStateException("Incorrect solicited type (Type: " + type + ", solicited: Dimension");
@@ -271,6 +323,11 @@ public class Keyframes {
         return (Dimension) frames.get(kfIndex).value;
     }
 
+    /**
+     * Returns the instant of the key frame specified by {@code kfIndex}.
+     * @param kfIndex index of the key frame holding the instant
+     * @return float value representing the instant
+     */
     public float getInstantAt(int kfIndex) {
         if (unit.equals(Unit.SECOND))
             return frames.get(kfIndex).instant;
@@ -278,6 +335,9 @@ public class Keyframes {
             return frames.get(kfIndex).instant / 100;
     }
 
+    /**
+     * @return Amount of key frames within this instance
+     */
     public int size() {
         return frames.size();
     }

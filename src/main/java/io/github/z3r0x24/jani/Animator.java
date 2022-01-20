@@ -8,7 +8,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * The animator class provides the ticking function to perform updates and takes care of
+ * The animator class provides the ticking function to perform updates and takes care of interpolating the fraction
+ * value using the easing function provided to generate the in-between values.
  */
 public abstract class Animator {
     private static final ScheduledExecutorService scheduler = createScheduler();
@@ -240,7 +241,7 @@ public abstract class Animator {
     public abstract void update(float fraction);
 
     /**
-     * Gets called upon the animation finished or the {@code stop()} method being called. Useful for chaining
+     * This method is called upon the animation finishing or the {@code stop()} method being called. Useful for chaining
      * animations.
      */
     protected void onAnimationFinished(){}
@@ -273,7 +274,7 @@ public abstract class Animator {
      *     </tr>
      * </table>
      * @param easing Easing interface defining an easing function.
-     * @see Easing.Default
+     * @see Easing.Default Default easing functions
      */
     public void setEasing(Easing easing) {
         this.easing = easing;
@@ -369,7 +370,7 @@ public abstract class Animator {
     }
 
     /**
-     * Setting this value to true when repeats are on will indicate the animation that it should run back only to the
+     * Setting this value to true on a looping animation will indicate the animation that it should run back only to the
      * start instead of looping backwards the same amount of times it looped forward.
      * @param backToStart if true, animation will only revert to starting point
      */
