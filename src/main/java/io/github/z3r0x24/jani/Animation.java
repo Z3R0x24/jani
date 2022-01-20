@@ -13,8 +13,12 @@ public abstract class Animation {
     private final Animator animator;
     private int keyframeIndex;
 
+    public Animation(Keyframes kf, float durationSeconds) {
+        this(kf, durationSeconds, 0, false, Easing.Default.LINEAR);
+    }
+
     public Animation(Keyframes kf, float durationSeconds, float delaySeconds) {
-        this(kf, durationSeconds, delaySeconds, false);
+        this(kf, durationSeconds, delaySeconds, false, Easing.Default.LINEAR);
     }
 
     public Animation(Keyframes kf, float durationSeconds, float delaySeconds, boolean loops) {
