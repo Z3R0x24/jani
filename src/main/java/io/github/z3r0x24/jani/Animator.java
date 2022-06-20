@@ -18,11 +18,11 @@ public abstract class Animator {
     private static int FPSTarget = 60;
     private static boolean frameSkip = true;
 
-    protected int duration;
-    protected boolean loops;
-    protected int delay;
-    protected volatile Easing easing;
-    protected volatile boolean reverse = false;
+    private int duration;
+    private boolean loops;
+    private int delay;
+    private volatile Easing easing;
+    private volatile boolean reverse = false;
 
     protected ScheduledFuture<?> ticker;
 
@@ -31,9 +31,9 @@ public abstract class Animator {
     protected int expectedDelay;
     protected long lastUpdateTime;
 
-    protected volatile boolean running = false;
-    protected volatile boolean backToStart = false;
-    protected volatile boolean freeze = false;
+    private volatile boolean running = false;
+    private volatile boolean backToStart = false;
+    private volatile boolean freeze = false;
 
     public Animator(int durationMillis, int delayMillis) {
         this(durationMillis, delayMillis, false);
@@ -255,6 +255,14 @@ public abstract class Animator {
     }
 
     /**
+     * Returns this animation's initial delay.
+     * @return Delay in milliseconds
+     */
+    public int getDelay() {
+        return delay;
+    }
+
+    /**
      * Sets the easing function to use. Default functions are given in the {@code Easing.Default} enum. All easing
      * functions should have a min value of 0 and a max value of 1. More specifically: <br>
      * <br>
@@ -281,6 +289,14 @@ public abstract class Animator {
     }
 
     /**
+     * Sets the duration of the animation. Effective after pausing/stopping and playing again.
+     * @param duration Animation duration in milliseconds
+     */
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    /**
      * Returns the duration of this animation.
      * @return Duration in milliseconds
      */
@@ -298,6 +314,13 @@ public abstract class Animator {
      */
     public void loop(boolean loop) {
         this.loops = loop;
+    }
+
+    /**
+     * @return true if the animation is set to loop
+     */
+    public boolean isLoop() {
+        return loops;
     }
 
     /**
@@ -379,12 +402,26 @@ public abstract class Animator {
     }
 
     /**
+     * @return true if the animation is set to run back to start only
+     */
+    public boolean isBackToStart() {
+        return backToStart;
+    }
+
+    /**
      * Determines whether the animation will return to the starting point on finishing or it will retain that state.
      * This only has effect on non-repeating animations.
      * @param b If true, animation will retain the ending state (fraction at 1)
      */
     public void freeze(boolean b) {
         this.freeze = b;
+    }
+
+    /**
+     * @return true if this animation is set to freeze
+     */
+    public boolean isFrozen() {
+        return this.freeze;
     }
 
     /**

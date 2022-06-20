@@ -13,7 +13,7 @@ public interface Easing {
         LINEAR(x -> x),
         EASE_IN_SIN(x -> 1 - (float) Math.cos(x * Math.PI / 2)),
         EASE_OUT_SIN(x -> (float) (Math.sin(x * Math.PI / 2))),
-        EASE_IN_OUT_SIN(x -> (float) (-Math.cos(x * Math.PI) - 1) / 2),
+        EASE_IN_OUT_SIN(x -> (float) (Math.abs(Math.cos(x * Math.PI) - 1) / 2)),
         EASE_IN_QUAD(x -> x * x),
         EASE_OUT_QUAD(x -> {
             float t = 1 - x;
