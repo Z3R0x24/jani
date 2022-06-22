@@ -79,7 +79,7 @@ public abstract class Animator {
      */
     public void play(boolean skipDelay) {
         if (ticker == null) {
-            if (freeze && fraction == 1)
+            if (freeze && fraction == 1 && !reverse)
                 cancel();
 
             initAccuracyThread();
@@ -147,6 +147,9 @@ public abstract class Animator {
      */
     public void backward(boolean skipDelay) {
         if (!reverse || !running) {
+            if (fraction == 0)
+                fraction = 1;
+
             pause();
             reverse = true;
             play(skipDelay);
