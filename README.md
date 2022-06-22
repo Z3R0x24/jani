@@ -8,7 +8,7 @@ jAni is compatible with Java 8 and up. It is available on Maven central:
 <dependency>
     <groupId>io.github.z3r0x24</groupId>
     <artifactId>jAni</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
