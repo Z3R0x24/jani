@@ -270,9 +270,11 @@ public abstract class Animator {
     /**
      * Sets the easing function to use. Default functions are given in the {@code Easing.Default} enum. All easing
      * functions should have a min value of 0 and a max value of 1. More specifically: <br>
-     * <br>
-     * <b>f(x)</b> =
      * <table>
+     *     <caption>Function definition</caption>
+     *     <tr>
+     *         <td><b>f(x)</b> =</td>
+     *     </tr>
      *     <tr>
      *         <td>0 ;</td>
      *         <td>x = 0</td>
