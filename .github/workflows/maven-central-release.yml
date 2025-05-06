@@ -38,3 +38,11 @@ jobs:
 
       - name: Deploy to Maven Central
         run: mvn deploy -P ossrh --no-transfer-progress -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
