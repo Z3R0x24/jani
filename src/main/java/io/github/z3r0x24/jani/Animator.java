@@ -272,7 +272,7 @@ public abstract class Animator {
      * functions should have a min value of 0 and a max value of 1. More specifically: <br>
      * <br>
      * <b>f(x)</b> =
-     * <table summary="">
+     * <table>
      *     <tr>
      *         <td>0 ;</td>
      *         <td>x = 0</td>
