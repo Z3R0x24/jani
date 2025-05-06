@@ -1,3 +1,5 @@
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.z3r0x24/jAni.svg)](https://central.sonatype.com/artifact/io.github.z3r0x24/jAni)
+
 # jAni - A Java animation library
 jAni is designed to be light and easy to use. Using animations is the best way to make your Swing application more lively!
 
@@ -8,7 +10,7 @@ jAni is compatible with Java 8 and up. It is available on Maven central:
 <dependency>
     <groupId>io.github.z3r0x24</groupId>
     <artifactId>jAni</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 </dependency>
 ```
 
@@ -17,8 +19,8 @@ jAni is able to:
 * Use key frames to create animations (in a similar fashion to CSS).
 * Play, pause, rewind, loop, chain animations easily.
 * Use easing functions to make your animation look better with little effort.
-* Utilize a user defined framerate.
-* Frame skip so you animations won't hurt the user experience as much on slower devices.
+* Utilize a user defined frame rate.
+* Frame skip so your animations won't hurt the user experience as much on slower devices.
 
 ## Usage
 To get started using jAni simply refer to the [wiki](https://github.com/Z3R0x24/jani/wiki) for usage instructions and detailed information about most classes (currently a WIP).
