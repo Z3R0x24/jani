@@ -16,7 +16,8 @@ public abstract class Animator {
     private static Thread timerAccuracyThread = null;
 
     private static int FPSTarget = 60;
-    private static boolean frameSkip = true;
+    private static volatile boolean frameSkip = true;
+    private static float GlobalSpeedFactor = 1;
 
     private int duration;
     private boolean loops;
@@ -28,6 +29,7 @@ public abstract class Animator {
 
     protected volatile float fraction;
     protected float fractionDelta;
+    protected volatile float speedFactor = GlobalSpeedFactor;
     protected int expectedDelay;
     protected long lastUpdateTime;
 
@@ -192,21 +194,21 @@ public abstract class Animator {
      * the actual delay (since last frame) by the expected delay, and multiplying the fraction delta by this value.
      */
     protected void tick() {
-        double multiplier;
+        float multiplier;
 
         if (lastUpdateTime == 0 || !frameSkip)
             multiplier = 1;
         else {
             long time = System.currentTimeMillis();
-            multiplier = (double) (time - lastUpdateTime) / expectedDelay;
+            multiplier = (float) (time - lastUpdateTime) / expectedDelay;
         }
 
         final float oldFraction = fraction;
 
         if (reverse)
-            fraction = oldFraction - fractionDelta * (float) multiplier;
+            fraction = oldFraction - (fractionDelta * speedFactor) * multiplier;
         else
-            fraction = oldFraction + fractionDelta * (float) multiplier;
+            fraction = oldFraction + (fractionDelta * speedFactor) * multiplier;
 
         if (loops) {
             if (backToStart && fraction <= 0) {
@@ -308,6 +310,24 @@ public abstract class Animator {
     }
 
     /**
+     * Sets this animator's speed. Effective immediately.
+     * @param factor Speed factor
+     * @throws IllegalArgumentException if {@code factor} is less than or equal to 0
+     */
+    public void setSpeed(float factor) {
+        if (factor <= 0) throw new IllegalArgumentException("Speed factor can't be less than or equal to 0");
+        this.speedFactor = factor;
+    }
+
+    /**
+     * Returns the speed of this animator.
+     * @return Speed factor
+     */
+    public float getSpeed() {
+        return speedFactor;
+    }
+
+    /**
      * Defines whether the animation should loop. Note that looping is different to restarting on finish: looping
      * implies the animation doesn't reach and endpoint. For starters, {@code onAnimationFinished()} won't be called
      * until {@code stop()} is called manually. Looping also supports frame skip while restart does not; if an animation
@@ -347,8 +367,27 @@ public abstract class Animator {
     }
 
     /**
+     * Gets the global speed factor for the animations.
+     * @return Global speed factor
+     */
+    public static float getGlobalSpeedFactor() {
+        return Animator.GlobalSpeedFactor;
+    }
+
+
+    /**
+     * Sets the global speed factor for the animations. All animators instantiated after calling this method will be
+     * affected.
+     * @param factor Speed factor for all animations
+     */
+    public static void setGlobalSpeedFactor(float factor) {
+        if (factor <= 0) throw new IllegalArgumentException("Speed factor can't be less than or equal to 0");
+        Animator.GlobalSpeedFactor = factor;
+    }
+
+    /**
      * Enables or disables frame skipping. Animations may take longer to complete than anticipated if frame skip is
-     * disabled, overall on older devices that cannot keep up with the rendering. Takes effect immediately after being
+     * disabled, specially on older devices that cannot keep up with the rendering. Takes effect immediately after being
      * called.
      * @param fs New value for frame skip for all animations
      */

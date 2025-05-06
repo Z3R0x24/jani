@@ -278,13 +278,69 @@ public abstract class Animation {
     }
 
     /**
+     * Sets the speed of this animation.
+     * @param factor Speed factor
+     */
+    public void setSpeed(float factor) {
+        animator.setSpeed(factor);
+    }
+
+    /**
+     * Returns the current speed of this animation.
+     * @return Speed factor
+     */
+    public float getSpeed() {
+        return animator.getSpeed();
+    }
+
+    /**
      * This method is called upon the animation finishing or the {@code stop()} method being called. Useful for chaining
      * animations.
      */
     public void onAnimationFinished(){}
 
+
+    /**
+     * Override this method to update (repaint) the component you want to animate. Please note that the {@code update}
+     * method called depends on the type of data specified in the {@code KeyFrames} object passed during the animation's
+     * instantiation. This method will only be called if the keyframes contained the {@code Dimension} type.
+     * @param dim Updated dimension
+     * @see Animation#update(int)
+     * @see Animation#update(double)
+     * @see Animation#update(Point)
+     */
     protected void update(Dimension dim) {}
+
+    /**
+     * Override this method to update (repaint) the component you want to animate. Please note that the {@code update}
+     * method called depends on the type of data specified in the {@code KeyFrames} object passed during the animation's
+     * instantiation. This method will only be called if the keyframes contained the {@code Point} type.
+     * @param p Updated point
+     * @see Animation#update(int)
+     * @see Animation#update(double)
+     * @see Animation#update(Dimension)
+     */
     protected void update(Point p) {}
+
+    /**
+     * Override this method to update (repaint) the component you want to animate. Please note that the {@code update}
+     * method called depends on the type of data specified in the {@code KeyFrames} object passed during the animation's
+     * instantiation. This method will only be called if the keyframes contained the {@code int} type.
+     * @param x Updated integer
+     * @see Animation#update(double)
+     * @see Animation#update(Dimension)
+     * @see Animation#update(Point)
+     */
     protected void update(int x) {}
+
+    /**
+     * Override this method to update (repaint) the component you want to animate. Please note that the {@code update}
+     * method called depends on the type of data specified in the {@code KeyFrames} object passed during the animation's
+     * instantiation. This method will only be called if the keyframes contained the {@code double} type.
+     * @param x Updated integer
+     * @see Animation#update(int)
+     * @see Animation#update(Dimension)
+     * @see Animation#update(Point)
+     */
     protected void update(double x) {}
 }

@@ -5,6 +5,8 @@ import io.github.z3r0x24.jani.Keyframes.Keyframes;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Demo {
     private static int arc = 0;
@@ -142,8 +144,11 @@ public class Demo {
         JFrame frame = new JFrame("Test");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        JPanel container = new JPanel();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        JPanel container = new JPanel(new BorderLayout());
+        container.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        JPanel controlPanel = new JPanel();
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
 
         JPanel buttonContainer = new JPanel(new GridLayout(0, 3));
 
@@ -167,10 +172,40 @@ public class Demo {
         buttonContainer.add(pause);
         buttonContainer.add(stop);
 
-        container.add(panel);
-        container.add(buttonContainer);
+        JPanel speedControls = new JPanel();
+        speedControls.setLayout(new BoxLayout(speedControls, BoxLayout.X_AXIS));
 
-        frame.add(container);
+        JSlider speedSlider = new JSlider(10, 40, 10);
+        JLabel speedLabel = new JLabel("1.0x");
+
+        speedLabel.setFont(speedLabel.getFont().deriveFont(Font.BOLD));
+
+        speedSlider.addChangeListener(e -> {
+            float speedFactor =
+                    BigDecimal.valueOf(
+                        speedSlider.getValue() / 10f
+                    ).setScale(1, RoundingMode.HALF_UP).floatValue();
+
+            speedLabel.setText(String.format("%.1f", speedFactor) + "x");
+
+            opacityAnimation.setSpeed(speedFactor);
+            arcAnimation.setSpeed(speedFactor);
+            rotate1.setSpeed(speedFactor);
+            flashAnimation.setSpeed(speedFactor);
+            rotate2.setSpeed(speedFactor);
+        });
+
+        speedControls.add(new JLabel("Speed:"));
+        speedControls.add(speedSlider);
+        speedControls.add(speedLabel);
+
+        controlPanel.add(buttonContainer);
+        controlPanel.add(speedControls);
+
+        container.add(panel, BorderLayout.CENTER);
+        container.add(controlPanel, BorderLayout. SOUTH);
+
+        frame.setContentPane(container);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
